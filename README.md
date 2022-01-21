@@ -49,9 +49,13 @@ The content of the file should look like this:
 AUTO_LOGIN_COOKIE=YOURCOOKIEVALUE
 ```
 
+---
+
 ## Launching the bot
 
 `npm run start` or `yarn start`
+
+---
 
 ## Available scripts
 
