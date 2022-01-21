@@ -33,22 +33,26 @@ const bootstrap = async ()=>{
     const startingProgress = +await page.$eval('body > div.container > div > div:nth-child(2) > div > div > div > div:nth-child(5) > div.row > div:nth-child(2) > h3', (node)=>{
         return node.innerText;
     });
+    let progress = startingProgress;
     try {
-        if (startingProgress < 5) {
-            for(let i = startingProgress; i < 5; i++){
-                console.log(`🤞 Round ${startingProgress + 1}... let's hope it won't crash`);
+        if (progress < 5) {
+            for(let i = progress; i < 5; i++){
+                console.log(`🤞 Round ${progress + 1}... let's hope it won't crash`);
                 await mainProcess(page);
+                progress++;
             }
         } else {
             console.log('💀 Nothing left to solve for today chief');
         }
     } catch (error) {
-        console.log('❎ [Crash Report] Check `err.png` for the last frame before the crash');
         page.screenshot({
             path: 'err.png'
         });
+        console.log('❎ [Crash Report] Check `err.png` for the last frame before the crash');
+        console.error(error);
     }
     console.log(`🏆 Main process finished in ${counter}s. Exiting...`);
     await browser.close();
+    process.exit(0);
 };
 bootstrap();

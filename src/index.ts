@@ -38,28 +38,30 @@ const bootstrap = async () => {
 			return node.innerText;
 		}
 	));
+	let progress = startingProgress;
 
 	try {
-		if (startingProgress < 5) {
-			for (let i = startingProgress; i < 5; i++) {
+		if (progress < 5) {
+			for (let i = progress; i < 5; i++) {
 				console.log(
-					`🤞 Round ${
-						startingProgress + 1
-					}... let's hope it won't crash`
+					`🤞 Round ${progress + 1}... let's hope it won't crash`
 				);
 				await mainProcess(page);
+				progress++;
 			}
 		} else {
 			console.log('💀 Nothing left to solve for today chief');
 		}
 	} catch (error) {
+		page.screenshot({ path: 'err.png' });
 		console.log(
 			'❎ [Crash Report] Check `err.png` for the last frame before the crash'
 		);
-		page.screenshot({ path: 'err.png' });
+		console.error(error);
 	}
 
 	console.log(`🏆 Main process finished in ${counter}s. Exiting...`);
 	await browser.close();
+	process.exit(0);
 };
 bootstrap();
