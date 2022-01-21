@@ -8,14 +8,14 @@
 
 ## Stack used
 
--   [https://www.typescriptlang.org/](Typescript)
--   [https://swc.rs/](SWC)
--   [https://yarnpkg.com/](Yarn)
--   [https://nodejs.org/en/](Nodejs)
--   [https://pptr.dev/](Puppeteer)
--   [https://www.npmjs.com/package/dotenv](Dotenv)
--   [https://www.npmjs.com/package/uuid](UUID)
--   [https://www.npmjs.com/package/nodemon](Nodemon)
+-   [Typescript](https://www.typescriptlang.org/)
+-   [SWC](https://swc.rs/)
+-   [Yarn](https://yarnpkg.com/)
+-   [Nodejs](https://nodejs.org/en/)
+-   [Puppeteer](https://pptr.dev/)
+-   [Dotenv](https://www.npmjs.com/package/dotenv)
+-   [UUID](https://www.npmjs.com/package/uuid)
+-   [Nodemon](https://www.npmjs.com/package/nodemon)
 
 ---
 
