@@ -2,7 +2,7 @@
 
 ![logo](./logo.png)
 
-## The spiritual successor to lingus written entirely in Typescript
+## The spiritual successor to lingus
 
 ---
 
