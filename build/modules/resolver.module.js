@@ -1,5 +1,6 @@
 import { v4 as uuid } from 'uuid';
 import { readFromDb, writeToDb } from './filesys.module.js';
+let retardnessLevel = 0;
 const getLottieQuestion = async (page)=>{
     return await page.$eval('.mb-0.h3', (node)=>{
         return node.innerHTML.trim();
@@ -34,13 +35,51 @@ const generateIfNotFound = async (page, lottieQuestion)=>{
     }
 };
 const solveLottie = async (page, lottieQuestion)=>{
+    // Backup plan if there are 2 or more words with the same translation
+    if (retardnessLevel === 2) {
+        const answ = await page.$eval('body > div.container-main > div.container-main-2 > h5:nth-child(5) > span > strong', (node)=>{
+            return node.innerText.trim();
+        });
+        await Promise.resolve([
+            page.click('#next'),
+            await page.waitForNavigation({
+                waitUntil: 'networkidle0'
+            }), 
+        ]);
+        await page.type('#answer', answ);
+        await Promise.resolve([
+            page.click('#nextBtn'),
+            await page.waitForNavigation({
+                waitUntil: 'networkidle0'
+            }), 
+        ]);
+        await Promise.resolve([
+            page.click('#next'),
+            await page.waitForNavigation({
+                waitUntil: 'networkidle0'
+            }), 
+        ]);
+        console.log('✅ Question solved... with brute force');
+        retardnessLevel = 0;
+        return;
+    }
+    // Guard for clicking through new words
+    if (await page.$('body > div.container-main > div.container-main-2 > h4.mb-0.h4')) {
+        await Promise.resolve([
+            page.click('#checkWordForm > form > button'),
+            await page.waitForNavigation({
+                waitUntil: 'networkidle0'
+            }), 
+        ]);
+        return;
+    }
     const dbEntries = await readFromDb();
     const match = dbEntries.find((element)=>{
         return element.wordPl === lottieQuestion;
     });
     if (match) {
         const progress = +await page.$eval('body > div.container-top > div.text-center > div > h5', (node)=>{
-            return node.innerHTML.trim().match(/(.+)\/20/)[1]; // x/20
+            return node.innerHTML.trim().match(/(.+)\/20/)[1]; // @returns XX/20
         });
         console.log(`🔃 [${progress + 1}/20] Solving the question...`);
         await page.type('#answer', match.wordEn);
@@ -50,6 +89,20 @@ const solveLottie = async (page, lottieQuestion)=>{
                 waitUntil: 'networkidle0'
             }), 
         ]);
+        if (await page.$('#lottie-fail')) {
+            retardnessLevel++;
+            console.log('❎ OOPSIE WOOPSIE!! Uwu Czterobok made a fucky wucky; retrying...');
+            if (retardnessLevel === 2) {
+                return;
+            }
+            await Promise.resolve([
+                page.click('#next'),
+                await page.waitForNavigation({
+                    waitUntil: 'networkidle0'
+                }), 
+            ]);
+            return;
+        }
         await Promise.resolve([
             page.click('#next'),
             await page.waitForNavigation({

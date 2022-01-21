@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
-import { login } from './modules/login.module.js';
 import 'dotenv/config';
+import { login } from './modules/login.module.js';
 import { mainProcess } from './modules/mainProcess.module.js';
 const bootstrap = async ()=>{
     // Check if autologin cookie exists
@@ -45,7 +45,7 @@ const bootstrap = async ()=>{
             console.log('💀 Nothing left to solve for today chief');
         }
     } catch (error) {
-        page.screenshot({
+        await page.screenshot({
             path: 'err.png'
         });
         console.log('❎ [Crash Report] Check `err.png` for the last frame before the crash');
