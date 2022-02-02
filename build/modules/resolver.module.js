@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { readFromDb, writeToDb } from './filesys.module.js';
 let retardnessLevel = 0;
 const getLottieQuestion = async (page)=>{
-    return await page.$eval('.mb-0.h3', (node)=>{
+    return await page.$eval('.mb-3.h3', (node)=>{
         return node.innerHTML.trim();
     });
 };
