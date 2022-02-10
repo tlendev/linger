@@ -1,10 +1,22 @@
 import { getLottieQuestion, solveLottie } from './resolver.module.js';
-const getProgress = async (page)=>{
+/**
+ * Gets the progress of solved questions. Must be awaited.
+ *
+ * @example
+ * const progress = await getProgress(page);
+ *
+ * @param page Page object
+ * @returns Promise: progress of solved questions
+ */ const getProgress = async (page)=>{
     return await page.$eval('body > div.container-top > div.text-center > div > h5', (node)=>{
         return parseInt(node.textContent.trim().match(/(.+)\/20/)[1]); // @returns XX/20
     });
 };
-const mainProcess = async (page)=>{
+/**
+ * The main instruction set for the bot. This should be awaited directly in index.ts
+ *
+ * @param page Page object
+ */ const mainProcess = async (page)=>{
     await page.goto('https://lingos.pl/students/learning', {
         waitUntil: 'networkidle0'
     });

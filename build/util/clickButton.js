@@ -1,6 +1,5 @@
 /**
- * Clicks the button on a page and waits for navigation.
- * Must be awaited
+ * Clicks the button on a page and waits for navigation. Must be awaited.
  *
  * @example
  * await clickButton(page, '#test')

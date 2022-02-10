@@ -1,6 +1,15 @@
 import { Page } from 'puppeteer';
 import { getLottieQuestion, solveLottie } from './resolver.module.js';
 
+/**
+ * Gets the progress of solved questions. Must be awaited.
+ *
+ * @example
+ * const progress = await getProgress(page);
+ *
+ * @param page Page object
+ * @returns Promise: progress of solved questions
+ */
 const getProgress = async (page: Page): Promise<number> => {
 	return await page.$eval(
 		'body > div.container-top > div.text-center > div > h5',
@@ -10,6 +19,11 @@ const getProgress = async (page: Page): Promise<number> => {
 	);
 };
 
+/**
+ * The main instruction set for the bot. This should be awaited directly in index.ts
+ *
+ * @param page Page object
+ */
 const mainProcess = async (page: Page) => {
 	await page.goto('https://lingos.pl/students/learning', {
 		waitUntil: 'networkidle0',
