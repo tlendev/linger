@@ -4,8 +4,6 @@
 
 ## The spiritual successor to lingus
 
----
-
 ## Stack used
 
 -   [Typescript](https://www.typescriptlang.org/)
@@ -16,8 +14,6 @@
 -   [Dotenv](https://www.npmjs.com/package/dotenv)
 -   [UUID](https://www.npmjs.com/package/uuid)
 -   [Nodemon](https://www.npmjs.com/package/nodemon)
-
----
 
 ## Instalation
 
@@ -49,17 +45,13 @@ The content of the file should look like this:
 AUTO_LOGIN_COOKIE=YOURCOOKIEVALUE
 ```
 
----
-
 ## Launching the bot
 
 `npm run start` or `yarn start`
-
----
 
 ## Available scripts
 
 -   `start` - start the bot
 -   `start:dev` - start the bot in development mode
 -   `start:dev:head` - start the bot in development mode (without headless mode)
--   `watch` - start the typescript compiler (requires SWC installed)
+-   `watch` - start the typescript compiler in watch mode
