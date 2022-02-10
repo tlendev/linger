@@ -2,7 +2,12 @@ import { v4 as uuid } from 'uuid';
 import { clickButton } from '../util/clickButton.js';
 import { readFromDb, writeToDb } from './filesys.module.js';
 let retardnessLevel = 0;
-const getLottieQuestion = async (page)=>{
+/**
+ * Gets the current question to solve. Must be awaited.
+ *
+ * @param page Page object
+ * @returns Promise: question to solve as a string
+ */ const getLottieQuestion = async (page)=>{
     return await page.$eval('.mb-3.h3', (node)=>{
         return node.innerHTML.trim();
     });

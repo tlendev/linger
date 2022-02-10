@@ -5,7 +5,13 @@ import { readFromDb, writeToDb } from './filesys.module.js';
 
 let retardnessLevel = 0;
 
-const getLottieQuestion = async (page: Page) => {
+/**
+ * Gets the current question to solve. Must be awaited.
+ *
+ * @param page Page object
+ * @returns Promise: question to solve as a string
+ */
+const getLottieQuestion = async (page: Page): Promise<string> => {
 	return await page.$eval('.mb-3.h3', (node) => {
 		return node.innerHTML.trim();
 	});
