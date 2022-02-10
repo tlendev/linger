@@ -10,6 +10,7 @@
 	"scripts": {
 		"start": "node build/index",
 		"start:dev": "nodemon build/index",
+		"start:dev:head": "nodemon build/index HEAD",
 		"watch": "swc --watch src/ -d build/"
 	},
 	"dependencies": {

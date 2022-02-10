@@ -61,4 +61,5 @@ AUTO_LOGIN_COOKIE=YOURCOOKIEVALUE
 
 -   `start` - start the bot
 -   `start:dev` - start the bot in development mode
+-   `start:dev:head` - start the bot in development mode (without headless mode)
 -   `watch` - start the typescript compiler (requires SWC installed)

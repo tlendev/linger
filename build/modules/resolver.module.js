@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid';
+import { clickButton } from '../util/clickButton.js';
 import { readFromDb, writeToDb } from './filesys.module.js';
 let retardnessLevel = 0;
 const getLottieQuestion = async (page)=>{
@@ -12,12 +13,7 @@ const generateIfNotFound = async (page, lottieQuestion)=>{
         return element.wordPl === lottieQuestion;
     })) {
         console.log(`🟠 [Notice]: DB search failed! Generating new entry for "${lottieQuestion}"...`);
-        await Promise.resolve([
-            page.click('#nextBtn'),
-            await page.waitForNavigation({
-                waitUntil: 'networkidle0'
-            }), 
-        ]);
+        await clickButton(page, '#nextBtn');
         const lottieAnswer = await page.$eval('body > div.container-main > div.container-main-2 > h5:nth-child(5) > span > strong', (node)=>{
             return node.innerHTML.trim();
         });
@@ -38,7 +34,7 @@ const solveLottie = async (page, lottieQuestion)=>{
     // Backup plan if there are 2 or more words with the same translation
     if (retardnessLevel === 2) {
         const answ = await page.$eval('body > div.container-main > div.container-main-2 > h5:nth-child(5) > span > strong', (node)=>{
-            return node.innerText.trim();
+            return node.textContent.trim();
         });
         await Promise.resolve([
             page.click('#next'),

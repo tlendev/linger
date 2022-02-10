@@ -2,7 +2,6 @@ import { Page } from 'puppeteer';
 import { getLottieQuestion, solveLottie } from './resolver.module.js';
 
 const mainProcess = async (page: Page) => {
-	// why is this ignored?
 	await page.goto('https://lingos.pl/students/learning', {
 		waitUntil: 'networkidle0',
 	});

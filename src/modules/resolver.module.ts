@@ -1,5 +1,6 @@
 import { Page } from 'puppeteer';
 import { v4 as uuid } from 'uuid';
+import { clickButton } from '../util/clickButton.js';
 import { readFromDb, writeToDb } from './filesys.module.js';
 
 let retardnessLevel = 0;
@@ -20,10 +21,7 @@ const generateIfNotFound = async (page: Page, lottieQuestion: string) => {
 		console.log(
 			`🟠 [Notice]: DB search failed! Generating new entry for "${lottieQuestion}"...`
 		);
-		await Promise.resolve([
-			page.click('#nextBtn'),
-			await page.waitForNavigation({ waitUntil: 'networkidle0' }),
-		]);
+		await clickButton(page, '#nextBtn');
 		const lottieAnswer = await page.$eval(
 			'body > div.container-main > div.container-main-2 > h5:nth-child(5) > span > strong',
 			(node) => {
@@ -48,7 +46,7 @@ const solveLottie = async (page: Page, lottieQuestion: string) => {
 		const answ: string = await page.$eval(
 			'body > div.container-main > div.container-main-2 > h5:nth-child(5) > span > strong',
 			(node) => {
-				return node.innerText.trim();
+				return node.textContent.trim();
 			}
 		);
 		await Promise.resolve([
