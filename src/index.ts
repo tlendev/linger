@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { login } from './modules/login.module.js';
 import { mainProcess } from './modules/mainProcess.module.js';
 import { init } from './init.js';
@@ -8,7 +7,7 @@ const bootstrap = async () => {
 	setInterval(() => {
 		counter++;
 	}, 1000);
-	const [_browser, page] = await init();
+	const [browser, page] = await init();
 
 	try {
 		await login(page);
@@ -34,8 +33,8 @@ const bootstrap = async () => {
 		}
 
 		console.log(`🏆 Main process finished in ${counter}s. Exiting...`);
-		// await browser.close();
-		// process.exit(0);
+		await browser.close();
+		process.exit(0);
 	} catch (error) {
 		await page.screenshot({ path: 'err.png' });
 		console.log(

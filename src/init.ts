@@ -1,5 +1,6 @@
 import { Browser, Page } from 'puppeteer';
 import puppeteer from 'puppeteer';
+import 'dotenv/config';
 
 /**
  * Inits a browser instance and a page instance. Also sets cookies and handles switching on and off graphic mode. Must be awaited.
