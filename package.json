@@ -4,14 +4,14 @@
 	"description": "lingos automation tool written in typescript",
 	"main": "index.js",
 	"author": "tlendev",
-	"license": "MIT",
+	"license": "AGPL",
 	"private": false,
 	"type": "module",
 	"scripts": {
 		"start": "node build/index",
 		"start:dev": "nodemon build/index",
 		"start:dev:head": "nodemon build/index HEAD",
-		"watch": "swc --watch src/ -d build/"
+		"watch": "npx swc --watch src/ -d build/"
 	},
 	"dependencies": {
 		"dotenv": "^14.1.0",
@@ -20,6 +20,8 @@
 		"uuid": "^8.3.2"
 	},
 	"devDependencies": {
+		"@swc/cli": "^0.1.55",
+		"@swc/core": "^1.2.138",
 		"@types/node": "^17.0.9",
 		"@types/puppeteer": "^5.4.4",
 		"@types/uuid": "^8.3.4",
